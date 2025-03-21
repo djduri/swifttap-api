@@ -1,0 +1,49 @@
+{
+  "profiles": {
+    "Docker_Development": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "sslPort": 44375,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    },
+    "Docker_Testing": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "sslPort": 44376,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Testing"
+      }
+    },
+    "Docker_Stagging": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "sslPort": 44375,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Stagging"
+      }
+    },
+
+    "Docker_Production": {
+      "commandName": "Docker",
+      "launchBrowser": true,
+      "sslPort": 44375,
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/swagger",
+      "publishAllPorts": true,
+      "useSSL": true,
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Production"
+      }
+    }
+  }
+}
