@@ -404,7 +404,7 @@ appsettings.*.json
 *.http
 
 # Do a exception for the Debug codebase directories
-!T2T.Domain/Debugs
-!T2T.Infrastructure/Database/Configurations/Debugs
-!T2T.Application/Features/Debugs
-!T2T.API/Areas/Debug
+!SWIFTTAP.Domain/Debugs
+!SWIFTTAP.Infrastructure/Database/Configurations/Debugs
+!SWIFTTAP.Application/Features/Debugs
+!SWIFTTAP.API/Areas/Debug
