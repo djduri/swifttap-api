@@ -11,17 +11,15 @@ internal class ThemeConfiguration : IEntityTypeConfiguration<Theme>
 
         builder.HasKey(i => i.CardId);
 
-        builder.Property(x => x.Name)
-               .HasMaxLength(100);
+        builder.Property(x => x.Name).HasMaxLength(100);
+        builder.Property(x => x.PrimaryColor).HasMaxLength(25);
+        builder.Property(x => x.SecondaryColor).HasMaxLength(25);
+        builder.Property(x => x.TextDark).HasMaxLength(25);
+        builder.Property(x => x.TextLight).HasMaxLength(25);
+        builder.Property(x => x.Background).HasMaxLength(25);
+        builder.Property(x => x.TextOnButtons).HasMaxLength(25);
 
-        builder.Property(x => x.PrimaryColor)
-               .HasMaxLength(25);
-
-        builder.Property(x => x.SecondaryColor)
-               .HasMaxLength(25);
-
-        builder.Property(x => x.HasSharpEdges)
-               .IsRequired();
+        builder.Property(x => x.HasSharpEdges).IsRequired();
 
         builder.HasOne(x => x.Card)
                .WithOne(x => x.Theme)

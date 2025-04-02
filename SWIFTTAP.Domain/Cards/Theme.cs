@@ -9,6 +9,10 @@ public sealed class Theme
     public string? Name { get; private set; }
     public string? PrimaryColor { get; private set; }
     public string? SecondaryColor { get; private set; }
+    public string? TextDark { get; private set; }
+    public string? TextLight { get; private set; }
+    public string? Background { get; private set; }
+    public string? TextOnButtons { get; private set; }
     public bool HasSharpEdges { get; private set; }
 
     public Theme SetName(string? name)
@@ -29,6 +33,30 @@ public sealed class Theme
         return this;
     }
 
+    public Theme SetTextDark(string? textDark)
+    { 
+        TextDark = textDark;
+        return this;
+    }
+
+    public Theme SetTextLight(string? textLight)
+    { 
+        TextLight = textLight;
+        return this;
+    }
+
+    public Theme SetBackground(string? background)
+    { 
+        Background = background;
+        return this;
+    }
+
+    public Theme SetTextOnButtons(string? textOnButtons)
+    { 
+        TextOnButtons = textOnButtons;
+        return this;
+    }
+
     public Theme SetHasSharpEdges(bool hasSharpEdges)
     {
         HasSharpEdges = hasSharpEdges;
@@ -42,12 +70,23 @@ public sealed class Theme
 
     public static class Factory
     {
-        public static Theme Create(string name, string primaryColor, string secondaryColor, bool hasSharpEdges)
+        public static Theme Create(string name,
+                                   string primaryColor,
+                                   string secondaryColor,
+                                   string textDark,
+                                   string textLight,
+                                   string background,
+                                   string textOnButtons,
+                                   bool hasSharpEdges)
         { 
             return new Theme()
                 .SetName(name)
                 .SetPrimaryColor(primaryColor)
                 .SetSecondaryColor(secondaryColor)
+                .SetTextDark(textDark)
+                .SetTextLight(textLight)
+                .SetBackground(background)
+                .SetTextOnButtons(textOnButtons)
                 .SetHasSharpEdges(hasSharpEdges);
         }
     }

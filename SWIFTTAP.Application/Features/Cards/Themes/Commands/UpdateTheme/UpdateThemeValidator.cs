@@ -9,5 +9,9 @@ public sealed class UpdateThemeValidator : AbstractValidator<UpdateThemeCommand>
         RuleFor(x => x.Name).MaximumLength(100);
         RuleFor(x => x.PrimaryColor).MaximumLength(25);
         RuleFor(x => x.SecondaryColor).MaximumLength(25);
+        RuleFor(x => x.TextDark).MaximumLength(25);
+        RuleFor(x => x.TextLight).MaximumLength(25);
+        RuleFor(x => x.Background).MaximumLength(25);
+        RuleFor(x => x.TextOnButtons).MaximumLength(25);
     }
 }
