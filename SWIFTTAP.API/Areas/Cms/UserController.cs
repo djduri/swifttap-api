@@ -19,6 +19,7 @@ using SWIFTTAP.Application.Features.Administration.Users.DTOs;
 using SWIFTTAP.Application.Features.Administration.Users.Queries.GetAllUsers;
 using SWIFTTAP.Application.Features.Administration.Users.Queries.GetUser;
 using SWIFTTAP.Application.Features.Administration.Users.Queries.GetUserAsAdmin;
+using SWIFTTAP.Application.Features.Administration.Users.Queries.IsUniqueNameAvailable;
 
 namespace SWIFTTAP.API.Areas.Cms;
 
@@ -44,6 +45,12 @@ public class UserController : CmsController
     [HttpGet("List")]
     [SwaggerOperation(OperationId = "ListUsers")]
     public async Task<ActionResult<RangedDTO<UserSimpleDTO>>> GetAllUsers([FromQuery] GetAllUsersQuery query) =>
+        Ok(await _sender.Send(query));
+
+    [AllowAnonymous]
+    [HttpGet("IsUniqueNameAvailable")]
+    [SwaggerOperation(OperationId = "GetIsUniqueNameAvailable")]
+    public async Task<ActionResult<bool>> GetIsUniqueNameAvailable([FromQuery] IsUniqueNameAvailableQuery query) =>
         Ok(await _sender.Send(query));
 
     [AllowAnonymous]
