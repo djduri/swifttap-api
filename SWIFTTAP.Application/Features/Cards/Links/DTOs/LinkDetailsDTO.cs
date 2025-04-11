@@ -5,5 +5,6 @@ public sealed class LinkDetailsDTO
     public required string Type { get;  set; }
     public required string Name { get;  set; }
     public required string Url { get;  set; }
+    public int? Order { get; set; }
     public required long CardId { get;  set; }
 }

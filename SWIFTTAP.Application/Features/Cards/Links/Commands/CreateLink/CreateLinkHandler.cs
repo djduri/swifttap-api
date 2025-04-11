@@ -2,6 +2,9 @@
 using SWIFTTAP.Infrastructure.Abstractions;
 using SWIFTTAP.Domain.Cards;
 using SWIFTTAP.Application.Services.Interfaces;
+using SWIFTTAP.Application.Features.Cards.Links.Specifications;
+using SWIFTTAP.Application.Exceptions;
+using SWIFTTAP.Domain.Messages;
 
 namespace SWIFTTAP.Application.Features.Cards.Links.Commands.CreateLink;
 internal sealed class CreateLinkHandler : ICommandHandler<CreateLinkCommand, long>
@@ -23,10 +26,14 @@ internal sealed class CreateLinkHandler : ICommandHandler<CreateLinkCommand, lon
     {
         var cardId = _userService.GetAuthenticatedUserCardId();
 
+        if (await _repository.AnyAsync(new FindLinkByCardIdAndOrderSpecification(cardId, request.Order), cancellationToken))        
+            throw EntityCreateException.FromErrorCode(ErrorCodes.Link.OrderAlreadyExists);      
+
         var newLink = Link.Factory.Create(request.Name,
-                                                 request.Type,
-                                                 request.Url,
-                                                 cardId);
+                                          request.Type,
+                                          request.Url,
+                                          request.Order,
+                                          cardId);
         _repository.Add(newLink);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

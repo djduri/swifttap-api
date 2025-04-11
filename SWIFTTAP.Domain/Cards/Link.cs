@@ -1,5 +1,4 @@
-﻿using SWIFTTAP.Domain.Administration;
-using SWIFTTAP.Domain.Base;
+﻿using SWIFTTAP.Domain.Base;
 using SWIFTTAP.Domain.Extensions;
 using SWIFTTAP.Domain.Messages;
 using SWIFTTAP.Domain.Statistics;
@@ -10,6 +9,7 @@ public sealed class Link : Entity
     public string Type { get; private set; }
     public string Name { get; private set; }
     public string Url { get; private set; }
+    public int? Order { get; private set; }
     public long CardId { get; private set; }
     public Card Card { get; private set; }
     public IList<LinkVisitStatistic> LinkVisitStatistics { get; private set; }
@@ -42,6 +42,12 @@ public sealed class Link : Entity
         return this;
     }
 
+    public Link SetOrder(int? order)
+    {
+        Order = order;
+        return this;
+    }
+
     public Link SetCardId(long cardId)
     { 
         if (cardId == default)
@@ -58,12 +64,17 @@ public sealed class Link : Entity
 
     public static class Factory
     {
-        public static Link Create(string name, string type, string url, long cardId)
+        public static Link Create(string name,
+                                  string type,
+                                  string url,
+                                  int order,
+                                  long cardId)
         { 
             return new Link()
                 .SetName(name)
                 .SetType(type)
                 .SetUrl(url)
+                .SetOrder(order)
                 .SetCardId(cardId);
         }
     }

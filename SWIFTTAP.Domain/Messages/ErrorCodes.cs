@@ -56,7 +56,8 @@ public static class ErrorCodes
         InvalidUrl,
         InvalidType,
         InvalidCardId,
-        NotFound
+        NotFound,
+        OrderAlreadyExists
     }
 
     public enum LinkVisitStatistic

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using SWIFTTAP.Application.Abstractions;
 using SWIFTTAP.Application.Exceptions;
+using SWIFTTAP.Application.Features.Cards.Links.Specifications;
 using SWIFTTAP.Application.Services.Interfaces;
 using SWIFTTAP.Domain.Cards;
 using SWIFTTAP.Domain.Messages;
@@ -40,10 +41,18 @@ internal sealed class UpdateLinkHandler : ICommandHandler<UpdateLinkCommand, lon
             throw AccessDeniedException.FromErrorCode(ErrorCodes.Application.AccessDenied);
         }
 
+        // Jeśli ma nastąpić zmiana order to sprawdzamy czy taki order juz czasem nie istnieje
+        if (link.Order != request.Order)
+        {
+            if (await _repository.AnyAsync(new FindLinkByCardIdAndOrderSpecification(cardId, request.Order), cancellationToken))
+                throw EntityCreateException.FromErrorCode(ErrorCodes.Link.OrderAlreadyExists);
+        }
+
         // Zmiana danych linku
         link.SetName(request.Name)
             .SetType(request.Type)
-            .SetUrl(request.Url);
+            .SetUrl(request.Url)
+            .SetOrder(request.Order);
 
         // Zapisanie zmian do bazy danych
         await _unitOfWork.SaveChangesAsync(cancellationToken);

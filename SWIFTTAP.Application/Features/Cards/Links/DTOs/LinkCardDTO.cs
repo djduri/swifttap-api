@@ -5,4 +5,5 @@ public sealed class LinkCardDTO
     public required string Type { get; set; }
     public required string Name { get; set; }
     public required string Url { get; set; }
+    public int? Order { get; set; }
 }
