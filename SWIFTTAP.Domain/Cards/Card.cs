@@ -11,6 +11,10 @@ public sealed class Card : Entity
     public User User { get; private set; }
     public Guid Guid { get; private set; }
     public string UniqueName { get; private set; }
+    public string? PhoneNumber { get; private set; }
+    public string? Email { get; private set; }
+    public bool IsPhoneNumberShareable { get; private set; }
+    public bool IsEmailShareable { get; private set; }
     public bool HasLogo { get; private set; }
     public Logo Logo { get; private set; }
     public Theme Theme { get; private set; }
@@ -27,6 +31,30 @@ public sealed class Card : Entity
         return this;
     }
 
+    public Card SetPhoneNumber(string? phoneNumber)
+    { 
+        PhoneNumber = phoneNumber;
+        return this;
+    }
+
+    public Card SetEmail(string? email)
+    {
+        Email = email;
+        return this;
+    }
+
+    public Card SetIsPhoneNumberShareable(bool isPhoneNumberShareable)
+    { 
+        IsPhoneNumberShareable = isPhoneNumberShareable;
+        return this;
+    }
+
+    public Card SetIsEmailShareable(bool isEmailShareable)
+    {
+        IsEmailShareable = isEmailShareable;
+        return this;
+    }
+
     public Card SetHasLogo(bool hasLogo)
     {
         HasLogo = hasLogo;
@@ -36,6 +64,8 @@ public sealed class Card : Entity
     internal Card()
     {
         Guid = Guid.NewGuid();
+        IsEmailShareable = false;
+        IsPhoneNumberShareable = false;
         Theme = new Theme();
         Logo = new Logo();        
         Links = new List<Link>();

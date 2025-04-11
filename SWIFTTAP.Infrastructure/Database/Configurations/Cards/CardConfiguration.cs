@@ -14,15 +14,14 @@ internal class CardConfiguration : IEntityTypeConfiguration<Card>
 
         builder.HasIndex(x => x.UniqueName).IsUnique();      // Unikalność dla UniqueName
 
-        builder.Property(x => x.UniqueName)
-            .HasMaxLength(100)
-            .IsRequired();
+        builder.Property(x => x.UniqueName).HasMaxLength(100).IsRequired();
 
-        builder.Property(x => x.HasLogo)
-            .IsRequired();
+        builder.Property(x => x.HasLogo).IsRequired();
 
-        builder.Property(x => x.Guid)
-            .IsRequired();
+        builder.Property(x => x.Guid).IsRequired();
+
+        builder.Property(x => x.Email).HasMaxLength(150);
+        builder.Property(x => x.PhoneNumber).HasMaxLength(25);
 
         // Relacja 1:1 między Card i User (powiązanie przez UserId w Card)
         builder.HasOne(x => x.User)
