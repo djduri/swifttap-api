@@ -32,8 +32,8 @@ public class UserController : CmsController
 
     [HttpGet()]
     [SwaggerOperation(OperationId = "GetUser")]
-    public async Task<ActionResult<UserDetailsDTO>> GetUser([FromQuery] GetUserQuery query) =>
-        Ok(await _sender.Send(query));
+    public async Task<ActionResult<UserDetailsDTO>> GetUser() =>    
+       Ok(await _sender.Send(new GetUserQuery()));
 
     [AuthorizeRole(Roles.Admin)]
     [HttpGet("Id/AsAdmin")]
