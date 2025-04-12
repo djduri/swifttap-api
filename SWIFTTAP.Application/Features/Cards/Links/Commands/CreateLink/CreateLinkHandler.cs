@@ -24,10 +24,7 @@ internal sealed class CreateLinkHandler : ICommandHandler<CreateLinkCommand, lon
 
     public async Task<long> Handle(CreateLinkCommand request, CancellationToken cancellationToken)
     {
-        var cardId = _userService.GetAuthenticatedUserCardId();
-
-        if (await _repository.AnyAsync(new FindLinkByCardIdAndOrderSpecification(cardId, request.Order), cancellationToken))        
-            throw EntityCreateException.FromErrorCode(ErrorCodes.Link.OrderAlreadyExists);      
+        var cardId = _userService.GetAuthenticatedUserCardId(); 
 
         var newLink = Link.Factory.Create(request.Name,
                                           request.Type,

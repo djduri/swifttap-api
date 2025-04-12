@@ -39,14 +39,7 @@ internal sealed class UpdateLinkHandler : ICommandHandler<UpdateLinkCommand, lon
             // Dodanie logowania, gdy użytkownik nie jest administratorem i próbuje zmienić link, który nie należy do niego
             _logger.LogWarning("A user tried to update a link with ID {LinkId} that does not belong to them. Access denied.", link.Id);
             throw AccessDeniedException.FromErrorCode(ErrorCodes.Application.AccessDenied);
-        }
-
-        // Jeśli ma nastąpić zmiana order to sprawdzamy czy taki order juz czasem nie istnieje
-        if (link.Order != request.Order)
-        {
-            if (await _repository.AnyAsync(new FindLinkByCardIdAndOrderSpecification(cardId, request.Order), cancellationToken))
-                throw EntityCreateException.FromErrorCode(ErrorCodes.Link.OrderAlreadyExists);
-        }
+        }       
 
         // Zmiana danych linku
         link.SetName(request.Name)
