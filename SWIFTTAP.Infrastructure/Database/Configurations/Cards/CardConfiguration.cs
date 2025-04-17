@@ -22,7 +22,7 @@ internal class CardConfiguration : IEntityTypeConfiguration<Card>
 
         builder.Property(x => x.Guid).IsRequired();
 
-        builder.Property(x => x.Email).HasMaxLength(150);
+        builder.Property(x => x.Email).HasMaxLength(255);
         builder.Property(x => x.PhoneNumber).HasMaxLength(25);
 
         // Relacja 1:1 między Card i User (powiązanie przez UserId w Card)

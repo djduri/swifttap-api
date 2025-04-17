@@ -22,6 +22,7 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     {
     }
     public new DbSet<User> Users { get; set; }
+    public DbSet<DeletedUser> DeletedUsers { get; set; }
     public DbSet<UserKeys> UserKeys { get; set; }
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 

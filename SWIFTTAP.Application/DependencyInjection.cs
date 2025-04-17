@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SWIFTTAP.Application.Abstractions;
+using SWIFTTAP.Application.Features.Administration.DeletedUsers.DTOs;
 using SWIFTTAP.Application.Features.Administration.Users.DTOs;
 using SWIFTTAP.Application.Features.Cards.Links.DTOs;
 using SWIFTTAP.Application.Features.Cards.Themes.DTOs;
@@ -46,6 +47,7 @@ public static class DependencyInjection
         services.AddSingleton(provider => new MapperConfiguration(mapper =>
         {
             mapper.AddProfile(new UserProfile());
+            mapper.AddProfile(new DeletedUserProfile());
             mapper.AddProfile(new LinkProfile());
             mapper.AddProfile(new ThemeProfile());
             mapper.AddProfile(new CardProfile());

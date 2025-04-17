@@ -34,6 +34,14 @@ public static class ErrorCodes
         NotFound
     }
 
+    public enum DeletedUser
+    {
+        InvalidName,
+        InvalidReason,
+        InvalidEmail,
+        NotFound
+    }
+
     public enum Email
     {
         InvalidMessageId,

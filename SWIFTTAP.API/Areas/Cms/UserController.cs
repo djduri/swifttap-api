@@ -14,6 +14,7 @@ using SWIFTTAP.Application.Features.Administration.Users.Commands.RegisterUser;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.ResetPassword;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.ResetPasswordAsAdmin;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.ResetPasswordConfirm;
+using SWIFTTAP.Application.Features.Administration.Users.Commands.SelfDeleteUser;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.UpdateUser;
 using SWIFTTAP.Application.Features.Administration.Users.DTOs;
 using SWIFTTAP.Application.Features.Administration.Users.Queries.GetAllUsers;
@@ -113,5 +114,10 @@ public class UserController : CmsController
     [HttpDelete]
     [SwaggerOperation(OperationId = "DeleteUser")]
     public async Task<ActionResult<long>> DeleteUser(DeleteUserCommand command) =>
-        Ok(await _sender.Send(command));    
+        Ok(await _sender.Send(command));
+
+    [HttpDelete("SelfDelete")]
+    [SwaggerOperation(OperationId = "SelfDeleteUser")]
+    public async Task<ActionResult<long>> SelfDeleteUser(SelfDeleteUserCommand command) =>
+        Ok(await _sender.Send(command));
 }
