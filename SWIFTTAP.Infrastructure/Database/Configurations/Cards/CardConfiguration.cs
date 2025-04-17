@@ -16,6 +16,8 @@ internal class CardConfiguration : IEntityTypeConfiguration<Card>
 
         builder.Property(x => x.UniqueName).HasMaxLength(100).IsRequired();
 
+        builder.Property(x => x.Description).HasMaxLength(500);
+
         builder.Property(x => x.HasLogo).IsRequired();
 
         builder.Property(x => x.Guid).IsRequired();

@@ -11,6 +11,7 @@ public sealed class Card : Entity
     public User User { get; private set; }
     public Guid Guid { get; private set; }
     public string UniqueName { get; private set; }
+    public string? Description { get; private set; }
     public string? PhoneNumber { get; private set; }
     public string? Email { get; private set; }
     public bool IsPhoneNumberShareable { get; private set; }
@@ -28,6 +29,12 @@ public sealed class Card : Entity
             throw DomainException.FromErrorCode(ErrorCodes.Card.InvalidUniqueName);
 
         UniqueName = uniqueName;
+        return this;
+    }
+
+    public Card SetDescription(string? description)
+    { 
+        Description = description;
         return this;
     }
 

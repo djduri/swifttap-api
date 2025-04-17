@@ -30,6 +30,7 @@ internal sealed class UpdateCardHandler : ICommandHandler<UpdateCardCommand, lon
 
         card.SetEmail(request.Email)
             .SetPhoneNumber(request.PhoneNumber)
+            .SetDescription(request.Description)
             .SetIsEmailShareable(request.IsEmailShareable)
             .SetIsPhoneNumberShareable(request.IsPhoneNumberShareable);
 
