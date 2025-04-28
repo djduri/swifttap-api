@@ -11,6 +11,8 @@ using SWIFTTAP.Application.Features.Statistics.CardVisitStatistics.Queries.GetSa
 using SWIFTTAP.Application.Features.Statistics.LinkVisitStatistics.Commands.CreateLinkVisitStatistic;
 using SWIFTTAP.Application.Features.Statistics.LinkVisitStatistics.Queries.GetSampledAllLinkVisitStatistics;
 using SWIFTTAP.Application.Features.Statistics.LinkVisitStatistics.Queries.GetSampledLinkVisitStatistics;
+using SWIFTTAP.Application.Features.Statistics.UserCountStatistics.DTOs;
+using SWIFTTAP.Application.Features.Statistics.UserCountStatistics.Queries.GetSampledUserCountStatistics;
 
 namespace SWIFTTAP.API.Areas.Cms;
 
@@ -47,5 +49,12 @@ public class StatisticsContoller: CmsController
     [HttpGet("SampledAllLinkVisitStatistics")]
     [SwaggerOperation(OperationId = "GetSampledAllLinkVisitStatistics")]
     public async Task<ActionResult<IEnumerable<VisitStatisticSampledDTO>>> GetSampledAllLinkVisitStatistics([FromQuery] GetSampledAllLinkVisitStatisticsQuery query) =>
+        Ok(await _sender.Send(query));
+
+    //[AuthorizeRole(Roles.Admin)]
+    [AllowAnonymous]
+    [HttpGet("SampledUserCountStatistics")]
+    [SwaggerOperation(OperationId = "GetSampledUserCountStatistics")]
+    public async Task<ActionResult<IEnumerable<UserCountStatisticSampleDTO>>> GetSampledUserCountStatistics([FromQuery] GetSampledUserCountStatisticsQuery query) =>
         Ok(await _sender.Send(query));
 }

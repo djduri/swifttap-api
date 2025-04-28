@@ -53,7 +53,8 @@ public static class BackgroundJobsSettingsConfiguration
             });
         }
 
-        RegisterJob<IRefreshTokenExpiredCleanupBackgroundJob>(backgroundJobsSettings.CronJobSchedules.RefreshTokenExpiredCleanupSchedule);      
+        RegisterJob<IRefreshTokenExpiredCleanupBackgroundJob>(backgroundJobsSettings.CronJobSchedules.RefreshTokenExpiredCleanupSchedule);
+        RegisterJob<IUserCountStatisticBackgroundJob>(backgroundJobsSettings.CronJobSchedules.UserCountStatisticSchedule);
 
         return app;
     }

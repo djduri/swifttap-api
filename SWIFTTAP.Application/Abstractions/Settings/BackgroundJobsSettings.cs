@@ -1,5 +1,6 @@
 ﻿using NCrontab;
 using SWIFTTAP.Domain.Common;
+using System.Data;
 
 namespace SWIFTTAP.Application.Abstractions.Settings;
 
@@ -22,10 +23,12 @@ public sealed class BackgroundJobsSettings : IValidatableSettings
 public sealed class CronJobSchedules
 {
     public string RefreshTokenExpiredCleanupSchedule { get; set; } = string.Empty;
+    public string UserCountStatisticSchedule { get; set; } = "28 10 * * *";
 
     public bool IsValid()
     {
         if (!IsValidCronExpression(RefreshTokenExpiredCleanupSchedule)) return false;
+        if (!IsValidCronExpression(UserCountStatisticSchedule)) return false;
         return true;
     }
 
