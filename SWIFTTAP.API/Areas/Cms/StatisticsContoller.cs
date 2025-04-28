@@ -51,8 +51,7 @@ public class StatisticsContoller: CmsController
     public async Task<ActionResult<IEnumerable<VisitStatisticSampledDTO>>> GetSampledAllLinkVisitStatistics([FromQuery] GetSampledAllLinkVisitStatisticsQuery query) =>
         Ok(await _sender.Send(query));
 
-    //[AuthorizeRole(Roles.Admin)]
-    [AllowAnonymous]
+    [AuthorizeRole(Roles.Admin)]
     [HttpGet("SampledUserCountStatistics")]
     [SwaggerOperation(OperationId = "GetSampledUserCountStatistics")]
     public async Task<ActionResult<IEnumerable<UserCountStatisticSampleDTO>>> GetSampledUserCountStatistics([FromQuery] GetSampledUserCountStatisticsQuery query) =>
