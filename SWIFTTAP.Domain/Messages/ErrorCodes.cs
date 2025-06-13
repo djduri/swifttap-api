@@ -107,6 +107,12 @@ public static class ErrorCodes
         InvalidLanguage,
     }
 
+    public enum VcfDownloadStatistic
+    { 
+        InvalidCardId,
+        NotFound
+    }
+
     public enum User
     {
         AlreadyExists,

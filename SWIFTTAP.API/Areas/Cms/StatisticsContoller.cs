@@ -13,6 +13,8 @@ using SWIFTTAP.Application.Features.Statistics.LinkVisitStatistics.Queries.GetSa
 using SWIFTTAP.Application.Features.Statistics.LinkVisitStatistics.Queries.GetSampledLinkVisitStatistics;
 using SWIFTTAP.Application.Features.Statistics.UserCountStatistics.DTOs;
 using SWIFTTAP.Application.Features.Statistics.UserCountStatistics.Queries.GetSampledUserCountStatistics;
+using SWIFTTAP.Application.Features.Statistics.VcfDownloadStatistics.Commands.CreateVcfDownloadStatistic;
+using SWIFTTAP.Application.Features.Statistics.VcfDownloadStatistics.Queries.GetSampledVcfDownloadStatistics;
 
 namespace SWIFTTAP.API.Areas.Cms;
 
@@ -27,6 +29,12 @@ public class StatisticsContoller: CmsController
     [HttpPost("LinkVisit")]
     [SwaggerOperation(OperationId = "PostLinkVisit")]
     public async Task<ActionResult<long>> PostLinkVisit(CreateLinkVisitStatisticCommand command) =>
+        Ok(await _sender.Send(command));
+
+    [AllowAnonymous]
+    [HttpPost("VcfDownload")]
+    [SwaggerOperation(OperationId = "PostVcfDownload")]
+    public async Task<ActionResult<long>> PostVcfDownload(CreateVcfDownloadStatisticCommand command) =>
         Ok(await _sender.Send(command));
 
     [HttpGet("SampledCardVisitStatistics")]
@@ -55,5 +63,10 @@ public class StatisticsContoller: CmsController
     [HttpGet("SampledUserCountStatistics")]
     [SwaggerOperation(OperationId = "GetSampledUserCountStatistics")]
     public async Task<ActionResult<IEnumerable<UserCountStatisticSampleDTO>>> GetSampledUserCountStatistics([FromQuery] GetSampledUserCountStatisticsQuery query) =>
+        Ok(await _sender.Send(query));
+
+    [HttpGet("SampledVcfDownloadStatistics")]
+    [SwaggerOperation(OperationId = "GetSampledVcfDownloadStatistics")]
+    public async Task<ActionResult<IEnumerable<VisitStatisticSampledDTO>>> GetSampledVcfDownloadStatistics([FromQuery] GetSampledVcfDownloadStatisticsQuery query) =>
         Ok(await _sender.Send(query));
 }

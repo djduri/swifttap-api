@@ -2,6 +2,7 @@
 using SWIFTTAP.Domain.Cards;
 using SWIFTTAP.Domain.Extensions;
 using SWIFTTAP.Domain.Messages;
+using SWIFTTAP.Domain.Statistics;
 
 namespace SWIFTTAP.Domain.Administration;
 

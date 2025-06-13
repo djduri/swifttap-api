@@ -36,6 +36,7 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     public DbSet<CardVisitStatistic> CardVisitStatistics => Set<CardVisitStatistic>();
     public DbSet<LinkVisitStatistic> LinkVisitStatistics => Set<LinkVisitStatistic>();
     public DbSet<UserCountStatistic> UserCountStatistics => Set<UserCountStatistic>();
+    public DbSet<VcfDownloadStatistic> VcfDownloadStatistics => Set<VcfDownloadStatistic>();
 
     // Add sets here...
 
