@@ -9,12 +9,13 @@ public sealed class RegisterUserValidator : AbstractValidator<RegisterUserComman
         RuleFor(x => x.Email).IsEmail();
         RuleFor(x => x.UniqueName).NotEmpty().MaximumLength(100);
         RuleFor(x => x.Name).NotEmpty().MaximumLength(100);
-        RuleFor(x => x.Password)
-                    .NotEmpty()
-                    .MinimumLength(8)
-                    .Matches("[A-Z]")
-                    .Matches("[a-z]")
-                    .Matches("[0-9]")
-                    .Matches("[^a-zA-Z0-9]");
+        RuleFor(x => x.Password).NotEmpty();
+        //RuleFor(x => x.Password)
+        //            .NotEmpty()
+        //            .MinimumLength(8)
+        //            .Matches("[A-Z]")
+        //            .Matches("[a-z]")
+        //            .Matches("[0-9]")
+        //            .Matches("[^a-zA-Z0-9]");
     }
 }

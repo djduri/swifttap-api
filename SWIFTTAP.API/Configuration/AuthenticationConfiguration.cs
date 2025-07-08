@@ -20,12 +20,12 @@ public static class AuthenticationConfiguration
 		{
 			options.SignIn.RequireConfirmedAccount = true;
 
-            options.Password.RequireDigit = true;               // Hasło musi zawierać cyfrę
-            options.Password.RequireLowercase = true;           // Hasło musi zawierać małą literę
-            options.Password.RequireUppercase = true;           // Hasło musi zawierać dużą literę
-            options.Password.RequireNonAlphanumeric = true;     // Hasło musi zawierać znak specjalny
-            options.Password.RequiredLength = 8;                 // Minimalna długość hasła
-            options.Password.RequiredUniqueChars = 6;           // Liczba unikalnych znaków
+            options.Password.RequireDigit = false;               // Hasło musi zawierać cyfrę
+            options.Password.RequireLowercase = false;           // Hasło musi zawierać małą literę
+            options.Password.RequireUppercase = false;           // Hasło musi zawierać dużą literę
+            options.Password.RequireNonAlphanumeric = false;     // Hasło musi zawierać znak specjalny
+            options.Password.RequiredLength = 4;                 // Minimalna długość hasła
+            options.Password.RequiredUniqueChars = 1;           // Liczba unikalnych znaków
         })
 		.AddDefaultTokenProviders()
 		.AddEntityFrameworkStores<DatabaseContext>();
