@@ -32,7 +32,11 @@ internal sealed class UpdateThemeHandler : ICommandHandler<UpdateThemeCommand, l
         card.Theme.SetName(request.Name)
                   .SetPrimaryColor(request.PrimaryColor)
                   .SetSecondaryColor(request.SecondaryColor)
-                  .SetHasSharpEdges(request.HasSharpEdges);
+                  .SetHasSharpEdges(request.HasSharpEdges)
+                  .SetTextDark(request.TextDark)
+                  .SetTextLight(request.TextLight)
+                  .SetBackground(request.Background)
+                  .SetTextOnButtons(request.TextOnButtons);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return cardId;
