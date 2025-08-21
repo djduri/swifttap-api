@@ -10,4 +10,5 @@ public sealed record UpdateThemeCommand(string? Name,
                                         string? TextLight,
                                         string? Background,
                                         string? TextOnButtons,
-                                        bool HasSharpEdges) : ICommand<long>;
+                                        bool HasSharpEdges,
+                                        bool RoundedProfilePicture) : ICommand<long>;

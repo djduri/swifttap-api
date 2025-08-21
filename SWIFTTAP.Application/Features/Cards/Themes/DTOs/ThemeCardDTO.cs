@@ -9,4 +9,5 @@ public sealed class ThemeCardDTO
     public string? Background { get; set; }
     public string? TextOnButtons { get; set; }
     public required bool HasSharpEdges { get; set; }
+    public required bool RoundedProfilePicture { get; set; }
 }

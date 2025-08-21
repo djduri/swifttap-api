@@ -14,6 +14,7 @@ public sealed class Theme
     public string? Background { get; private set; }
     public string? TextOnButtons { get; private set; }
     public bool HasSharpEdges { get; private set; }
+    public bool RoundedProfilePicture { get; private set; }
 
     public Theme SetName(string? name)
     {
@@ -60,6 +61,12 @@ public sealed class Theme
     public Theme SetHasSharpEdges(bool hasSharpEdges)
     {
         HasSharpEdges = hasSharpEdges;
+        return this;
+    }
+
+    public Theme SetRoundedProfilePicture(bool roundedProfilePicture)
+    {
+        RoundedProfilePicture = roundedProfilePicture;
         return this;
     }
 
