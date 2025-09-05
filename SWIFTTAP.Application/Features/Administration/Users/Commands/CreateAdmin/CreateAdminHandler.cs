@@ -40,19 +40,20 @@ internal sealed class CreateAdminHandler : ICommandHandler<CreateAdminCommand, l
 
     public async Task<long> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
     {
-        // Sprawdzanie, czy użytkownik z podanym e-mailem lub nazwą unikalną już istnieje równolegle
-        var emailExistsTask = _userManager.UserExistsByEmailAsync(request.Email);
-        var uniqueNameExistsTask = _cardRepository.AnyAsync(new FindCardByUniqueNameSpecification(request.UniqueName), cancellationToken);
-
-        await Task.WhenAll(emailExistsTask, uniqueNameExistsTask);
-
-        if (emailExistsTask.Result)
+        // Sprawdzanie czy istnieje już użytkownik z tym emailem
+        var emailExists = await _userManager.UserExistsByEmailAsync(request.Email);
+        if (emailExists)
         {
             _logger.LogWarning("Attempted to create admin user with an existing email: {Email}.", request.Email);
             throw EntityCreateException.FromErrorCode(ErrorCodes.User.AlreadyExists);
         }
 
-        if (uniqueNameExistsTask.Result)
+        // Sprawdzanie czy istnieje już karta z tym UniqueName
+        var uniqueNameExists = await _cardRepository.AnyAsync(
+            new FindCardByUniqueNameSpecification(request.UniqueName),
+            cancellationToken
+        );
+        if (uniqueNameExists)
         {
             _logger.LogWarning("Attempted to create admin card with an existing unique name: {UniqueName}.", request.UniqueName);
             throw EntityCreateException.FromErrorCode(ErrorCodes.Card.AlreadyExists);
