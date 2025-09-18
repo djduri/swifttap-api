@@ -4,9 +4,8 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="x-apple-disable-message-reformatting" />
-	<title>Twoje konto partnera zostało utworzone</title>
+	<title>Potwierdzenie rejestracji konta</title>
 	<style>
-		
 		table, td, div, h1, p {
 			font-family: Gill Sans, sans-serif;
 		}
@@ -16,27 +15,14 @@
 	<table role="presentation" style="width: 100%; border-collapse: collapse; text-align: center;">
 		<tr>
 			<td align="center" style="padding:40px 0 10px 0;background:#fff;">
-				<img src="data:image/png;base64,{{LogoBase64}}"
+				<img src="{{LogoBase64}}"
 					 alt="{{LogoName}}" width="{{LogoWidth}}" height="{{LogoHeight}}" style="display:block;" />
 			</td>
 		</tr>
 		<tr>
 			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}}; ">
-				<p>Witaj, {{FirstName}} {{LastName}}!</p>
-				<p>Administrator utworzył dla Ciebie konto partnera w systemie.</p>
-				<p>Twoje hasło:</p>
-			</td>
-		</tr>
-		<tr>
-			<td align="center" style="padding: 10px 30px 10px 30px; ">
-				<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px 16px 32px; text-decoration: none; font-size: 24px; ">
-					{{Password}}
-				</h1>
-			</td>
-		</tr>
-		<tr>
-			<td align="center" style="padding: 10px 30px 10px 30px;">
-				<a style="text-decoration: underline" href="{{AuthLink}}">Przejdź do strony logowania.</a>
+				<p>Cześć, {{Name}}!</p>
+				<p>Witamy! Twoje konto zostało pomyślnie utworzone w naszym systemie.</p>
 			</td>
 		</tr>
 	</table>

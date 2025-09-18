@@ -6,7 +6,6 @@
 	<meta name="x-apple-disable-message-reformatting" />
 	<title>Twoje konto administratora zostało utworzone</title>
 	<style>
-		
 		table, td, div, h1, p {
 			font-family: Gill Sans, sans-serif;
 		}
@@ -16,13 +15,13 @@
 	<table role="presentation" style="width: 100%; border-collapse: collapse; text-align: center;">
 		<tr>
 			<td align="center" style="padding:40px 0 10px 0;background:#fff;">
-				<img src="data:image/png;base64,{{LogoBase64}}"
+				<img src="{{LogoBase64}}"
 					 alt="{{LogoName}}" width="{{LogoWidth}}" height="{{LogoHeight}}" style="display:block;" />
 			</td>
 		</tr>
 		<tr>
 			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}}; ">
-				<p>Witaj, {{FirstName}} {{LastName}}!</p>
+				<p>Cześć, {{Name}}!</p>
 				<p>Administrator utworzył dla Ciebie konto administratora w systemie.</p>
 				<p>Twoje hasło:</p>
 			</td>
@@ -36,7 +35,7 @@
 		</tr>
 		<tr>
 			<td align="center" style="padding: 10px 30px 10px 30px;">
-				<a style="text-decoration: underline" href="{{AuthLink}}">Przejdź do strony logowania.</a>
+				<a style="text-decoration: underline" href="{{AuthLink}}">Przejdź do strony logowania</a>
 			</td>
 		</tr>
 	</table>

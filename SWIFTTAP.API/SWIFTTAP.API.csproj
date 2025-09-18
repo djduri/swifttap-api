@@ -68,6 +68,9 @@
     <None Update="Templates\PL\AuthTwoFactor.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Templates\PL\CreateUser.mustache">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Templates\PL\RegisterUser.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

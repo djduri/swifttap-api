@@ -4,9 +4,8 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<meta name="x-apple-disable-message-reformatting" />
-	<title>Potwierdź swoją tożsamość - kod logowania dwuetapowego</title>
+	<title>Potwierdź swoją tożsamość – kod logowania dwuetapowego</title>
 	<style>
-
 		table, td, div, h1, p {
 			font-family: Gill Sans, sans-serif;
 		}
@@ -16,15 +15,14 @@
 	<table role="presentation" style="width: 100%; border-collapse: collapse; text-align: center;">
 		<tr>
 			<td align="center" style="padding:40px 0 10px 0;background:#fff;">
-				<img src="data:image/png;base64,{{LogoBase64}}"
+				<img src="{{LogoBase64}}"
 					 alt="{{LogoName}}" width="{{LogoWidth}}" height="{{LogoHeight}}" style="display:block;" />
 			</td>
 		</tr>
 		<tr>
 			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}}; ">
-				<p>Witaj {{FirstName}}</p>
-				<p>Dziękujemy, że korzystasz z logowania dwuetapowego w naszej aplikacji. Aby potwierdzić swoją tożsamość, proszę użyć poniższego kodu weryfikacyjnego:</p>
-				<p></p>
+				<p>Cześć {{FirstName}},</p>
+				<p>Dziękujemy za korzystanie z logowania dwuetapowego w naszej aplikacji. Użyj poniższego kodu weryfikacyjnego, aby potwierdzić swoją tożsamość:</p>
 			</td>
 		</tr>
 		<tr>
@@ -37,7 +35,7 @@
 		<tr>
 			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}}; ">
 				<p>Ten kod jest ważny przez {{CodeValidityLengthInMinutes}} minut.</p>
-				<p>Jeśli nie próbowałeś(-aś) się zalogować, prosimy o natychmiastową zmianę hasła i skontaktowanie się z nami.</p>
+				<p>Jeśli to nie Ty próbowałeś się zalogować, natychmiast zmień swoje hasło i skontaktuj się z nami.</p>
 			</td>
 		</tr>
 	</table>
