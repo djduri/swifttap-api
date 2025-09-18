@@ -8,6 +8,8 @@ public sealed class ThemeCardDTO
     public string? TextLight { get; set; }
     public string? Background { get; set; }
     public string? TextOnButtons { get; set; }
+    public string? LinkBackgroundColor { get; set; }
+    public string? LinkTextColor { get; set; }
     public required bool HasSharpEdges { get; set; }
     public required bool RoundedProfilePicture { get; set; }
 }

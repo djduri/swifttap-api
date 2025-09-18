@@ -13,6 +13,8 @@ public sealed class Theme
     public string? TextLight { get; private set; }
     public string? Background { get; private set; }
     public string? TextOnButtons { get; private set; }
+    public string? LinkBackgroundColor { get; private set; }
+    public string? LinkTextColor { get; private set; }
     public bool HasSharpEdges { get; private set; }
     public bool RoundedProfilePicture { get; private set; }
 
@@ -52,6 +54,17 @@ public sealed class Theme
         return this;
     }
 
+    public Theme SetLinkBackgroundColor(string? linkBackgroundColor)
+    {
+        LinkBackgroundColor = linkBackgroundColor;
+        return this;
+    }
+    public Theme SetLinkTextColor(string? linkTextColor)
+    {
+        LinkTextColor = linkTextColor;
+        return this;
+    }
+
     public Theme SetTextOnButtons(string? textOnButtons)
     { 
         TextOnButtons = textOnButtons;
@@ -84,7 +97,9 @@ public sealed class Theme
                                    string textLight,
                                    string background,
                                    string textOnButtons,
-                                   bool hasSharpEdges)
+                                   bool hasSharpEdges,
+                                   string linkBackgroundColor,
+                                   string lintTextColor)
         { 
             return new Theme()
                 .SetName(name)
@@ -94,7 +109,9 @@ public sealed class Theme
                 .SetTextLight(textLight)
                 .SetBackground(background)
                 .SetTextOnButtons(textOnButtons)
-                .SetHasSharpEdges(hasSharpEdges);
+                .SetHasSharpEdges(hasSharpEdges)
+                .SetLinkBackgroundColor(linkBackgroundColor)
+                .SetLinkTextColor(lintTextColor);
         }
     }
 }

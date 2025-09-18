@@ -8,6 +8,8 @@ public sealed class ThemeDetailsDTO
     public string? TextDark { get; set; }
     public string? TextLight { get; set; }
     public string? Background { get; set; }
+    public string? LinkBackgroundColor { get; set; }
+    public string? LinkTextColor { get; set; }
     public string? TextOnButtons { get; set; }
     public required bool HasSharpEdges { get;  set; }
 }

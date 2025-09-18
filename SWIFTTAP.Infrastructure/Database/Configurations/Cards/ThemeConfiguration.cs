@@ -18,6 +18,8 @@ internal class ThemeConfiguration : IEntityTypeConfiguration<Theme>
         builder.Property(x => x.TextLight).HasMaxLength(25);
         builder.Property(x => x.Background).HasMaxLength(25);
         builder.Property(x => x.TextOnButtons).HasMaxLength(25);
+        builder.Property(x => x.LinkBackgroundColor).HasMaxLength(25);
+        builder.Property(x => x.LinkTextColor).HasMaxLength(25);
 
         builder.Property(x => x.HasSharpEdges).IsRequired();
 

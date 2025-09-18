@@ -10,5 +10,7 @@ public sealed record UpdateThemeCommand(string? Name,
                                         string? TextLight,
                                         string? Background,
                                         string? TextOnButtons,
+                                        string? LinkBackgroundColor,
+                                        string? LinkTextColor,
                                         bool HasSharpEdges,
                                         bool RoundedProfilePicture) : ICommand<long>;

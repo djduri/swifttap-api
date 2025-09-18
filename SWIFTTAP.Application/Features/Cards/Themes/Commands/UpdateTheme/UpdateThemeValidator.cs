@@ -13,5 +13,7 @@ public sealed class UpdateThemeValidator : AbstractValidator<UpdateThemeCommand>
         RuleFor(x => x.TextLight).MaximumLength(25);
         RuleFor(x => x.Background).MaximumLength(25);
         RuleFor(x => x.TextOnButtons).MaximumLength(25);
+        RuleFor(x => x.LinkBackgroundColor).MaximumLength(25);
+        RuleFor(x => x.LinkTextColor).MaximumLength(25);
     }
 }
