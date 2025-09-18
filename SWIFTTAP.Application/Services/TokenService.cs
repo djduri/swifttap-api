@@ -79,7 +79,8 @@ internal sealed class TokenService : ITokenService
             new Claim(ClaimTypes.Email, user.Email ?? string.Empty),
             new Claim("Name", user.Name),
             new Claim("CardId", user.Card.Id.ToString()),
-            new Claim("2FA", user.TwoFactorEnabled.ToString())
+            new Claim("2FA", user.TwoFactorEnabled.ToString()),
+            new Claim("EmailConfirmed", user.EmailConfirmed.ToString())
         };
 
         claims.AddRange(await GetClaimsFromRolesAsync(user));

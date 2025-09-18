@@ -18,7 +18,7 @@ public static class AuthenticationConfiguration
 
 		services.AddIdentity<User, IdentityRole<long>>(options =>
 		{
-			options.SignIn.RequireConfirmedAccount = true;
+			options.SignIn.RequireConfirmedAccount = false;
 
             options.Password.RequireDigit = false;               // Hasło musi zawierać cyfrę
             options.Password.RequireLowercase = false;           // Hasło musi zawierać małą literę
