@@ -6,6 +6,7 @@ public sealed class FrontendUrlSettings : IValidatableSettings
 {
     public string? Url { get; init; }
     public string? ResetPassword { get; init; }
+    public string? ConfirmEmail { get; init; }
     public string? GetUserCard { get; init; }
     public string? Auth { get; init; }
 
@@ -14,6 +15,8 @@ public sealed class FrontendUrlSettings : IValidatableSettings
         if (string.IsNullOrWhiteSpace(Url)) return false;
 
         if (string.IsNullOrWhiteSpace(ResetPassword)) return false;
+
+        if (string.IsNullOrWhiteSpace(ConfirmEmail)) return false;
 
         if (string.IsNullOrWhiteSpace(GetUserCard)) return false;
 

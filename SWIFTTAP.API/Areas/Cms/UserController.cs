@@ -10,6 +10,7 @@ using SWIFTTAP.Application.Features.Administration.Users.Commands.ChangePassword
 using SWIFTTAP.Application.Features.Administration.Users.Commands.CreateAdmin;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.CreateUser;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.DeleteUser;
+using SWIFTTAP.Application.Features.Administration.Users.Commands.RegisterConfirm;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.RegisterUser;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.ResetPassword;
 using SWIFTTAP.Application.Features.Administration.Users.Commands.ResetPasswordAsAdmin;
@@ -108,6 +109,17 @@ public class UserController : CmsController
     [HttpPut("Password/Reset/Confirm")]
     [SwaggerOperation(OperationId = "PutResetPasswordConfirm")]
     public async Task<ActionResult<long>> PutResetPasswordConfirm(ResetPasswordConfirmCommand command) =>
+        Ok(await _sender.Send(command));
+
+    /// <summary>
+    /// [AllowAnonymous]
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    [AllowAnonymous]
+    [HttpPut("User/Register/Confirm")]
+    [SwaggerOperation(OperationId = "PutRegisterConfirm")]
+    public async Task<ActionResult<long>> PutRegisterConfirm(RegisterConfirmCommand command) =>
         Ok(await _sender.Send(command));
 
     [AuthorizeRole(Roles.Admin)]

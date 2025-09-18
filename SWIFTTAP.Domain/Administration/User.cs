@@ -74,10 +74,21 @@ public sealed class User : IdentityEntity
     public static class Factory
     {
         public static User Create(string name,                                         
-                                         string email,
-                                         Card card)
+                                  string email,
+                                  Card card)
         {
-            //TODO: pytanie czy nie bedziemy robic potwierdzenia email ?
+            return new User()
+                .SetName(name)
+                .SetCard(card)
+                .SetEmail(email)
+                .SetUserName(email)
+                .SetEmailConfirmed(false);
+        }
+
+        public static User CreateWithConfirmedEmail(string name,
+                                                    string email,
+                                                    Card card)
+        {
             return new User()
                 .SetName(name)
                 .SetCard(card)

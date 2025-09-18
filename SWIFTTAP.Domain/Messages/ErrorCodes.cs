@@ -117,6 +117,7 @@ public static class ErrorCodes
     {
         AlreadyExists,
         CannotChangePassword,
+        CannotConfirmEmail,
         InvalidEmail,
         InvalidName,
         InvalidUniqueName,

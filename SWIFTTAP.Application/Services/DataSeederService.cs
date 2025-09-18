@@ -48,7 +48,7 @@ internal sealed class DataSeederService : IDataSeederService
             var newCard = Card.Factory.Create("SuperAdmin");
             _cardRepository.Add(newCard);
 
-            var admin = User.Factory.Create("SuperAdmin", adminUserEmail, newCard);
+            var admin = User.Factory.CreateWithConfirmedEmail("SuperAdmin", adminUserEmail, newCard);
             await _userManager.CreateAsync(admin, adminUserPassword);
         }
     }

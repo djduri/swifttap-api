@@ -69,7 +69,7 @@ internal sealed class CreateAdminHandler : ICommandHandler<CreateAdminCommand, l
         }
 
         // Tworzenie nowego użytkownika
-        var newUser = User.Factory.Create(request.Name, request.Email, newCard);
+        var newUser = User.Factory.CreateWithConfirmedEmail(request.Name, request.Email, newCard);
 
         // Generowanie hasła
         var generatedPassword = await SecretBuilder.GeneratePasswordAsync(null, cancellationToken);
