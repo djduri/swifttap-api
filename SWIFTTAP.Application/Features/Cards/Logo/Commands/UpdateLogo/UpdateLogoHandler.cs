@@ -1,4 +1,5 @@
-﻿using SWIFTTAP.Application.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using SWIFTTAP.Application.Abstractions;
 using SWIFTTAP.Application.Exceptions;
 using SWIFTTAP.Application.Features.Cards.Cards.Specifications;
 using SWIFTTAP.Application.Helpers;
@@ -17,24 +18,31 @@ internal sealed class UpdateLogoHandler : ICommandHandler<UpdateLogoCommand, lon
     private readonly IUnitOfWork _unitOfWork;
     private readonly IImageService _imageService;
     private readonly IUserService _userService;
+    private readonly ILogger<UpdateLogoHandler> _logger;
 
     public UpdateLogoHandler(IRepository<Card> cardRepository,
                              IUnitOfWork unitOfWork,
                              IImageService imageService,
-                             IUserService userService)
+                             IUserService userService,
+                             ILogger<UpdateLogoHandler> logger)
     {
         _cardRepository = cardRepository;
         _unitOfWork = unitOfWork;
         _imageService = imageService;
         _userService = userService;
+        _logger = logger;
     }
 
 
     public async Task<long> Handle(UpdateLogoCommand request, CancellationToken cancellationToken)
     {
-        var cardId = _userService.GetAuthenticatedUserCardId();
+        if (!_userService.HasAuthUserPermissionToCard(request.CardId))
+        {
+            _logger.LogWarning("Unauthorized attempt to update a logo for card with ID {TargetCardId}.", request.CardId);
+            throw AuthorizationException.FromErrorCode(ErrorCodes.Application.AccessDenied);
+        }
 
-        var card = await _cardRepository.GetAsync(new FindCardWithLogoSpecification(cardId), cancellationToken) ??
+        var card = await _cardRepository.GetAsync(new FindCardWithLogoSpecification(request.CardId), cancellationToken) ??
             throw EntityNotFoundException.FromErrorCode(ErrorCodes.Card.NotFound);
 
         if (request.File is null)

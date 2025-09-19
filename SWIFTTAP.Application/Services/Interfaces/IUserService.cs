@@ -18,4 +18,6 @@ public interface IUserService : IScopedAppService
     bool IsAuthenticatedUserNotAdmin();
     bool IsUserSuperAdmin(User user);
     bool HasAuthenticatedUserRole(params Roles[] roles);
+    bool HasAuthUserPermissionToUser(long targetUserId);
+    bool HasAuthUserPermissionToCard(long cardId);
 }

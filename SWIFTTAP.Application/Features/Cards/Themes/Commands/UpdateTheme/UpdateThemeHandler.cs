@@ -1,4 +1,5 @@
-﻿using SWIFTTAP.Application.Abstractions;
+﻿using Microsoft.Extensions.Logging;
+using SWIFTTAP.Application.Abstractions;
 using SWIFTTAP.Application.Exceptions;
 using SWIFTTAP.Application.Features.Cards.Cards.Specifications;
 using SWIFTTAP.Application.Services.Interfaces;
@@ -12,21 +13,28 @@ internal sealed class UpdateThemeHandler : ICommandHandler<UpdateThemeCommand, l
     private readonly IRepository<Card> _repository;
     private readonly IUnitOfWork _unitOfWork;
     private readonly IUserService _userService;
+    private readonly ILogger<UpdateThemeHandler> _logger;
 
     public UpdateThemeHandler(IRepository<Card> repository,
               IUnitOfWork unitOfWork,
-              IUserService userService)
+              IUserService userService,
+              ILogger<UpdateThemeHandler> logger)
     {
         _repository = repository;
         _unitOfWork = unitOfWork;
         _userService = userService;
+        _logger = logger;
     }
 
     public async Task<long> Handle(UpdateThemeCommand request, CancellationToken cancellationToken)
     {
-        var cardId = _userService.GetAuthenticatedUserCardId();
+        if (!_userService.HasAuthUserPermissionToCard(request.CardId))
+        {
+            _logger.LogWarning("Unauthorized attempt to update a theme for card with ID {TargetCardId}.", request.CardId);
+            throw AuthorizationException.FromErrorCode(ErrorCodes.Application.AccessDenied);
+        }
 
-        var card = await _repository.GetAsync(new FindCardWithThemeSpecification(cardId), cancellationToken) ??
+        var card = await _repository.GetAsync(new FindCardWithThemeSpecification(request.CardId), cancellationToken) ??
             throw EntityNotFoundException.FromErrorCode(ErrorCodes.User.NotFound);
 
         card.Theme.SetName(request.Name)
@@ -42,6 +50,6 @@ internal sealed class UpdateThemeHandler : ICommandHandler<UpdateThemeCommand, l
                   .SetLinkTextColor(request.LinkTextColor);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-        return cardId;
+        return request.CardId;
     }
 }

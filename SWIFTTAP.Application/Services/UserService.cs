@@ -93,7 +93,30 @@ internal sealed class UserService : IUserService
                             .Select(x => x.Value);
 
         return roles.All(role => userRoles.Contains(role.ToString()));
-    }   
+    }
+
+    public bool HasAuthUserPermissionToUser(long targetUserId)
+    {   
+        // Admin może wszystko
+        if (IsAuthenticatedUserAdmin())
+            return true;
+
+        // Zwykły użytkownik może tylko siebie
+        var authUserId = GetAuthenticatedUserId();
+        return authUserId == targetUserId;
+    }
+
+    public bool HasAuthUserPermissionToCard(long cardId)
+    {
+        // Admin może wszystko
+        if (IsAuthenticatedUserAdmin())
+            return true;
+
+        var authUserCardId = GetAuthenticatedUserCardId();
+
+        // Zwykły użytkownik może tylko siebie
+        return authUserCardId == cardId;
+    }
 
     // Prywatne metody
     private string? GetUserIdFromClaims() => GetClaimValue(ClaimTypes.NameIdentifier);

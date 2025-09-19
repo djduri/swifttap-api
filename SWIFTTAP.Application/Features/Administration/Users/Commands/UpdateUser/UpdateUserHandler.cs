@@ -35,8 +35,14 @@ internal sealed class UpdateUserHandler : ICommandHandler<UpdateUserCommand, lon
 
     public async Task<long> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
     {
-        var userId = _userService.GetAuthenticatedUserId();
-        var user = await _userRepository.GetAsync(new FindUserWithCardSpecification(userId), cancellationToken) ??
+        // Sprawdzenie uprawnień
+        if (!_userService.HasAuthUserPermissionToUser(request.Id))
+        {
+            _logger.LogWarning("Attempted to update user with ID {TargetUserId} without sufficient permissions.", request.Id);
+            throw AuthorizationException.FromErrorCode(ErrorCodes.Application.AccessDenied);
+        }
+
+        var user = await _userRepository.GetAsync(new FindUserWithCardSpecification(request.Id), cancellationToken) ??
             throw EntityNotFoundException.FromErrorCode(ErrorCodes.User.NotFound);
 
         // Sprawdzanie, czy użytkownik z podaną nazwą unikalną już istnieje

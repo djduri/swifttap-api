@@ -1,10 +1,12 @@
 ﻿using FluentValidation;
+using SWIFTTAP.Application.Extensions;
 
 namespace SWIFTTAP.Application.Features.Cards.Cards.Commands.UpdateCard;
 public sealed class UpdateCardValidator : AbstractValidator<UpdateCardCommand>
 {
     public UpdateCardValidator()
     {
+        RuleFor(x => x.CardId).IsIdentifier();
         RuleFor(x => x.Description).MaximumLength(500);
 
         // Walidacja adresu email (jeśli nie null)
