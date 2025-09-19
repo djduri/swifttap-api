@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json.Linq;
 using SWIFTTAP.Application.Abstractions;
 using SWIFTTAP.Application.Abstractions.Settings;
 using SWIFTTAP.Application.Exceptions;
@@ -10,6 +11,7 @@ using SWIFTTAP.Application.Services.Interfaces;
 using SWIFTTAP.Domain.Administration;
 using SWIFTTAP.Domain.Cards;
 using SWIFTTAP.Domain.Core;
+using SWIFTTAP.Domain.Extensions;
 using SWIFTTAP.Domain.Messages;
 using SWIFTTAP.Infrastructure.Abstractions;
 
@@ -22,13 +24,15 @@ internal sealed class CreateAdminHandler : ICommandHandler<CreateAdminCommand, l
     private readonly ILogger<CreateAdminHandler> _logger;
     private readonly FrontendUrlSettings _frontendUrlSettings;
     private readonly IMailSenderService _emailSenderService;
+    private readonly IUnitOfWork _unitOfWork;
 
     public CreateAdminHandler(UserManager<User> userManager,
                                IRepository<User> userRepository,
                                IRepository<Card> cardRepository,
                                ILogger<CreateAdminHandler> logger,
                                IOptions<FrontendUrlSettings> frontendUrlSettings,
-                               IMailSenderService emailSenderService)
+                               IMailSenderService emailSenderService,
+                               IUnitOfWork unitOfWork)
     {
         _userManager = userManager;
         _userRepository = userRepository;
@@ -36,6 +40,7 @@ internal sealed class CreateAdminHandler : ICommandHandler<CreateAdminCommand, l
         _logger = logger;
         _frontendUrlSettings = frontendUrlSettings.Value;
         _emailSenderService = emailSenderService;
+        _unitOfWork = unitOfWork;
     }
 
     public async Task<long> Handle(CreateAdminCommand request, CancellationToken cancellationToken)
@@ -69,17 +74,10 @@ internal sealed class CreateAdminHandler : ICommandHandler<CreateAdminCommand, l
         }
 
         // Tworzenie nowego użytkownika
-        var newUser = User.Factory.CreateWithConfirmedEmail(request.Name, request.Email, newCard);
+        var newUser = User.Factory.Create(request.Name, request.Email, newCard);
 
         // Generowanie hasła
         var generatedPassword = await SecretBuilder.GeneratePasswordAsync(null, cancellationToken);
-
-        // Tworzenie linku autoryzacji
-        var authLink = new Uri(new Uri(_frontendUrlSettings.Url!), _frontendUrlSettings.Auth).ToString();
-
-        // Wysyłanie e-maila
-        if (!await SendRegistrationEmail(request.Email, newUser.Name, generatedPassword, authLink))
-            throw EntityCreateException.FromErrorCode(ErrorCodes.User.RegistrationFailed);
 
         // Rejestracja użytkownika
         var identityResult = await _userManager.CreateAsync(newUser, generatedPassword);
@@ -94,29 +92,41 @@ internal sealed class CreateAdminHandler : ICommandHandler<CreateAdminCommand, l
         // Dodanie roli użytkownika
         await _userManager.AddToRoleAsync(newUser, Authorization.Roles.Admin.ToString());
 
+        // Wysyłanie e-maila
+        if (!await SendRegistrationEmail(newUser, generatedPassword))
+            throw EntityCreateException.FromErrorCode(ErrorCodes.User.RegistrationFailed);
+
+        await _unitOfWork.SaveChangesAsync(cancellationToken);
         return newUser.Id;
     }
 
-    private async Task<bool> SendRegistrationEmail(string email, string userName, string generatedPassword, string authLink)
+    private async Task<bool> SendRegistrationEmail(User user, string generatedPassword)
     {
         try
         {
-            var emailSentSuccessful = await _emailSenderService.SendEmailAsync(
-                email,
-                TemplateKey.CreateAdmin,
-                new Dictionary<string, object>
-                {
-                    { "Name", userName },
-                    { "Password", generatedPassword },
-                    { "AuthLink", authLink }
-                },
-                Domain.Common.Language.EN);
+            // Tworzenie linku autoryzacji
+            var authLink = new Uri(new Uri(_frontendUrlSettings.Url!), _frontendUrlSettings.Auth).ToString();
+
+            var confirmEmailToken = (await _userManager.GenerateEmailConfirmationTokenAsync(user)).EncodeToBase64();
+            var confirmationUrl = (_frontendUrlSettings.Url + _frontendUrlSettings.ConfirmEmail).Replace("{token}", confirmEmailToken)
+                                                                                                .Replace("{userEmail}", user.Email);
+
+            var emailSentSuccessful = await _emailSenderService.SendEmailAsync(user.Email!,
+                                                                               TemplateKey.CreateAdmin,
+                                                                               new Dictionary<string, object>
+                                                                               {
+                                                                                   { "Name", user.Name },
+                                                                                   { "Password", generatedPassword },
+                                                                                   { "AuthLink", authLink },
+                                                                                   { "ConfirmationUrl",  confirmationUrl},
+                                                                               },
+                                                                               Domain.Common.Language.EN);
 
             return emailSentSuccessful;
         }
         catch (Exception ex)
         {
-            _logger.LogError("Failed to send registration email to {Email}: {Error}.", email, ex.Message);
+            _logger.LogError("Failed to send registration email to {Email}: {Error}.", user.Email, ex.Message);
             return false;
         }
     }

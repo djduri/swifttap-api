@@ -20,7 +20,6 @@ internal sealed class RegisterUserHandler : ICommandHandler<RegisterUserCommand,
 {
     private readonly UserManager<User> _userManager;
     private readonly IMailSenderService _emailSenderService;
-    private readonly IRepository<User> _userRepository;
     private readonly IRepository<Card> _cardRepository;
     private readonly ILogger<RegisterUserHandler> _logger;
     private readonly IUnitOfWork _unitOfWork;
@@ -29,7 +28,6 @@ internal sealed class RegisterUserHandler : ICommandHandler<RegisterUserCommand,
 
     public RegisterUserHandler(UserManager<User> userManager,
                                IMailSenderService emailSenderService,
-                               IRepository<User> userRepository,
                                IRepository<Card> cardRepository,
                                IOptions<FrontendUrlSettings> frontendUrlSettings,
                                ILogger<RegisterUserHandler> logger,
@@ -38,7 +36,6 @@ internal sealed class RegisterUserHandler : ICommandHandler<RegisterUserCommand,
     {
         _userManager = userManager;
         _emailSenderService = emailSenderService;
-        _userRepository = userRepository;
         _cardRepository = cardRepository;
         _frontendUrlSettings = frontendUrlSettings.Value;
         _logger = logger;
@@ -86,9 +83,7 @@ internal sealed class RegisterUserHandler : ICommandHandler<RegisterUserCommand,
         // Dodanie roli użytkownika
         await _userManager.AddToRoleAsync(newUser, Authorization.Roles.User.ToString());
 
-        //TODO: dodać wysyłke maila z potwierdzeniem rejestracji
         var token = (await _userManager.GenerateEmailConfirmationTokenAsync(newUser)).EncodeToBase64();
-        var encodedToken = WebUtility.UrlEncode(token);
 
         var confirmationUrl = (_frontendUrlSettings.Url + _frontendUrlSettings.ConfirmEmail).Replace("{token}", token)
                                                                                             .Replace("{userEmail}", newUser.Email);

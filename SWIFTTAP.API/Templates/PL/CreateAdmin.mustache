@@ -20,22 +20,37 @@
 			</td>
 		</tr>
 		<tr>
-			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}}; ">
-				<p>Cześć, {{Name}}!</p>
+			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}};">
+				<p>Witaj, {{Name}}!</p>
 				<p>Administrator utworzył dla Ciebie konto administratora w systemie.</p>
 				<p>Twoje hasło:</p>
 			</td>
 		</tr>
 		<tr>
-			<td align="center" style="padding: 10px 30px 10px 30px; ">
-				<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px 16px 32px; text-decoration: none; font-size: 24px; ">
+			<td align="center" style="padding: 10px 30px 10px 30px;">
+				<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px; text-decoration: none; font-size: 24px;">
 					{{Password}}
 				</h1>
 			</td>
 		</tr>
 		<tr>
 			<td align="center" style="padding: 10px 30px 10px 30px;">
-				<a style="text-decoration: underline" href="{{AuthLink}}">Przejdź do strony logowania</a>
+				<a href="{{AuthLink}}" style="text-decoration: underline;">Przejdź do strony logowania</a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" style="padding: 20px 30px 10px 30px;">
+				<p>Aby potwierdzić swój adres e-mail, kliknij poniższy przycisk:</p>
+				<a href="{{ConfirmationUrl}}" style="text-decoration: none;">
+					<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px; font-size: 24px;">
+						Potwierdź e-mail
+					</h1>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" style="padding: 10px 30px 0 30px; font-size: 16px; color: {{TextColor}};">
+				<p>Jeśli nie utworzyłeś tego konta, zignoruj tę wiadomość lub skontaktuj się z administratorem.</p>
 			</td>
 		</tr>
 	</table>

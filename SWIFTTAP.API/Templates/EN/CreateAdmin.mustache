@@ -6,7 +6,6 @@
 	<meta name="x-apple-disable-message-reformatting" />
 	<title>Your administrator account has been created</title>
 	<style>
-
 		table, td, div, h1, p {
 			font-family: Gill Sans, sans-serif;
 		}
@@ -16,29 +15,42 @@
 	<table role="presentation" style="width: 100%; border-collapse: collapse; text-align: center;">
 		<tr>
 			<td align="center" style="padding:40px 0 10px 0;background:#fff;">
-				<!--<img src="data:image/png;base64,{{LogoBase64}}"
-							 alt="{{LogoName}}" width="{{LogoWidth}}" height="{{LogoHeight}}" style="display:block;" />-->
 				<img src="{{LogoBase64}}"
 					 alt="{{LogoName}}" width="{{LogoWidth}}" height="{{LogoHeight}}" style="display:block;" />
 			</td>
 		</tr>
 		<tr>
-			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}}; ">
+			<td align="left" style="padding: 10px 30px 0 30px; font-size: 20px; color: {{TextColor}};">
 				<p>Hello, {{Name}}!</p>
 				<p>An administrator has created an administrator account for you in the system.</p>
 				<p>Your password:</p>
 			</td>
 		</tr>
 		<tr>
-			<td align="center" style="padding: 10px 30px 10px 30px; ">
-				<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px 16px 32px; text-decoration: none; font-size: 24px; ">
+			<td align="center" style="padding: 10px 30px 10px 30px;">
+				<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px; text-decoration: none; font-size: 24px;">
 					{{Password}}
 				</h1>
 			</td>
 		</tr>
 		<tr>
 			<td align="center" style="padding: 10px 30px 10px 30px;">
-				<a style="text-decoration: underline" href="{{AuthLink}}">Go to login page.</a>
+				<a href="{{AuthLink}}" style="text-decoration: underline;">Go to login page</a>
+			</td>
+		</tr>
+		<tr>
+			<td align="center" style="padding: 20px 30px 10px 30px;">
+				<p>To confirm your email address, please click the button below:</p>
+				<a href="{{ConfirmationUrl}}" style="text-decoration: none;">
+					<h1 style="background: {{BackgroundColor}}; border: solid 1px {{BackgroundColor}}; color: {{BackgroundTextColor}}; padding: 16px 32px; font-size: 24px;">
+						Confirm Email
+					</h1>
+				</a>
+			</td>
+		</tr>
+		<tr>
+			<td align="left" style="padding: 10px 30px 0 30px; font-size: 16px; color: {{TextColor}};">
+				<p>If you did not create this account, please ignore this email or contact the administrator.</p>
 			</td>
 		</tr>
 	</table>
