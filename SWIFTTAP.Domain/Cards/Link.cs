@@ -7,6 +7,9 @@ namespace SWIFTTAP.Domain.Cards;
 public sealed class Link : Entity
 {
     public string Type { get; private set; }
+    public LinkKind LinkKind { get; private set; }
+    public bool HasIcon { get; private set; }
+    public LinkIcon? LinkIcon { get; private set; }
     public string Name { get; private set; }
     public string Url { get; private set; }
     public int? Order { get; private set; }
@@ -21,6 +24,12 @@ public sealed class Link : Entity
             throw DomainException.FromErrorCode(ErrorCodes.Link.InvalidType);
 
         Type = type;
+        return this;
+    }
+
+    public Link SetKind(LinkKind kind)
+    {
+        LinkKind = kind;  
         return this;
     }
 
@@ -57,6 +66,12 @@ public sealed class Link : Entity
         return this;
     }
 
+    public Link SetHasIcon(bool hasIcon)
+    {
+        HasIcon = hasIcon;
+        return this;
+    }
+
     private Link() 
     {
         LinkVisitStatistics = new List<LinkVisitStatistic>();
@@ -68,14 +83,16 @@ public sealed class Link : Entity
                                   string type,
                                   string url,
                                   int order,
-                                  long cardId)
+                                  long cardId,
+                                  LinkKind kind)
         { 
             return new Link()
                 .SetName(name)
                 .SetType(type)
                 .SetUrl(url)
                 .SetOrder(order)
-                .SetCardId(cardId);
+                .SetCardId(cardId)
+                .SetKind(kind);
         }
     }
 }

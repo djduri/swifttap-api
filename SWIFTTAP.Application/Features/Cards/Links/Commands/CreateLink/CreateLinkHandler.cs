@@ -42,7 +42,8 @@ internal sealed class CreateLinkHandler : ICommandHandler<CreateLinkCommand, lon
                                           request.Type,
                                           request.Url,
                                           request.Order,
-                                          request.CardId);
+                                          request.CardId,
+                                          request.LinkKind);
         _repository.Add(newLink);
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

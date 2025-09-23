@@ -23,6 +23,8 @@ internal class LinkConfiguration : IEntityTypeConfiguration<Link>
             .HasMaxLength(512)
             .IsRequired();
 
+        builder.Property(x => x.LinkKind).HasDefaultValue(LinkKind.Default).IsRequired();
+
         builder.HasOne(x => x.Card)
             .WithMany(x => x.Links) // jeśli User ma kolekcję Linków
             .HasForeignKey(x => x.CardId)

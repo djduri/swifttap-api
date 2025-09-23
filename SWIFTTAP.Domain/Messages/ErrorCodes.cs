@@ -68,6 +68,13 @@ public static class ErrorCodes
         OrderAlreadyExists
     }
 
+    public enum LinkIcon
+    {
+        InvalidLink,
+        InvalidLinkKind,
+        NotFound
+    }
+
     public enum LinkVisitStatistic
     { 
         InvalidLinkId,

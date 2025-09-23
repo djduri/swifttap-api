@@ -29,6 +29,7 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     public DbSet<Translation> Translations { get; set; }
 
     public DbSet<Link> Links => Set<Link>();
+    public DbSet<LinkIcon> LinkIcons => Set<LinkIcon>();
     public DbSet<Theme> Themes => Set<Theme>();
     public DbSet<Logo> Logos => Set<Logo>();
     public DbSet<Card> Cards => Set<Card>();

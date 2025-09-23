@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
 using SWIFTTAP.Application.Extensions;
 
-namespace SWIFTTAP.Application.Features.Cards.Logo.Commands.UpdateLogo;
-public sealed class UpdateLogoValidator : AbstractValidator<UpdateLogoCommand>
-{
-    public UpdateLogoValidator()
-    {
-        RuleFor(x => x.CardId).IsIdentifier();
+namespace SWIFTTAP.Application.Features.Cards.LinkIcons.Commands.UpdateLinkIcon;
 
+public sealed class UpdateLinkIconValidator : AbstractValidator<UpdateLinkIconCommand>
+{
+    public UpdateLinkIconValidator()
+    {
+        RuleFor(x => x.LinkId).IsIdentifier();
         When(x => x.File is not null, () =>
-        {
+        {            
             RuleFor(x => x.File).NotNull();
             RuleFor(x => x.File!.ContentType)
                 .Matches(@"^image\/(jpeg|png|bmp)$")
