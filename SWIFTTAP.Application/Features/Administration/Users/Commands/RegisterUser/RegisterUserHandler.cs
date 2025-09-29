@@ -94,8 +94,8 @@ internal sealed class RegisterUserHandler : ICommandHandler<RegisterUserCommand,
                                                  {
                                                              { "Name", newUser.Name },
                                                              { "ConfirmationUrl",  confirmationUrl},
-                                                 },
-                                                 _currentScopeService.GetLanguage());
+                                                 }//,
+                                                 /*currentScopeService.GetLanguage()*/);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

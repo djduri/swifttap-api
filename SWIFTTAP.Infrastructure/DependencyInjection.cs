@@ -50,7 +50,7 @@ public static class DependencyInjection
                 .Select(l => l.ToString().ToLower())
                 .ToArray();
 
-            var defaultLanguage = Language.PL.ToString().ToLower();
+            var defaultLanguage = Language.EN.ToString().ToLower();
 
             options.SetDefaultCulture(defaultLanguage);
             options.AddSupportedCultures(supportedLanguages);

@@ -3,7 +3,6 @@ using Microsoft.Extensions.Options;
 using SWIFTTAP.Application.Abstractions.Settings;
 using SWIFTTAP.Application.Services.Interfaces;
 using SWIFTTAP.Domain.Administration;
-using SWIFTTAP.Domain.Common;
 
 namespace SWIFTTAP.Application.Services;
 internal sealed class UserEmailService : IUserEmailService
@@ -35,11 +34,9 @@ internal sealed class UserEmailService : IUserEmailService
             { "FirstName", user.Name }
         };
 
-        bool emailSent = await _mailSenderService.SendEmailAsync(
-            user.Email!,
-            TemplateKey.AuthTwoFactor,
-            emailTemplateData,
-            Language.PL);
+        bool emailSent = await _mailSenderService.SendEmailAsync(user.Email!,
+                                                                 TemplateKey.AuthTwoFactor,
+                                                                 emailTemplateData);
 
         if (!emailSent)
         {

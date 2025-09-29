@@ -51,8 +51,8 @@ internal sealed class ResetPasswordHandler : ICommandHandler<ResetPasswordComman
                                                  {
                                                      { "FirstName", user.Name },
                                                      { "ResetUrl",  resetUrl},
-                                                 },
-                                                 _currentScopeService.GetLanguage());
+                                                 });
+                                                 //_currentScopeService.GetLanguage());
 
         // revoke all refresh tokens
         user.RevokeAllRefreshTokens();

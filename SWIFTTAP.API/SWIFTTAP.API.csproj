@@ -44,43 +44,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Templates\EN\AuthTwoFactor.mustache">
+    <None Update="Templates\en\AuthTwoFactor.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\EN\CreateUser.mustache">
+    <None Update="Templates\en\CreateUser.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\EN\RegisterUser.mustache">
+    <None Update="Templates\en\RegisterUser.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Templates\EN\CreateAdmin.mustache">
+    <None Update="Templates\en\CreateAdmin.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\EN\ResetPassword.mustache">
+    <None Update="Templates\en\ResetPassword.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\EN\ResetPasswordAsAdmin.mustache">
+    <None Update="Templates\en\ResetPasswordAsAdmin.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\PL\AuthTwoFactor.mustache">
+    <None Update="Templates\pl\AuthTwoFactor.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\PL\CreateUser.mustache">
+    <None Update="Templates\pl\CreateUser.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\PL\RegisterUser.mustache">
+    <None Update="Templates\pl\RegisterUser.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\PL\CreateAdmin.mustache">
+    <None Update="Templates\pl\CreateAdmin.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\PL\ResetPassword.mustache">
+    <None Update="Templates\pl\ResetPassword.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="Templates\PL\ResetPasswordAsAdmin.mustache">
+    <None Update="Templates\pl\ResetPasswordAsAdmin.mustache">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>

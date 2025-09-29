@@ -24,7 +24,7 @@ internal sealed class CurrentScopeService : ICurrentScopeService
         return _httpContextAccessor.HttpContext?.Request.Headers.UserAgent;
     }
 
-    public Language GetLanguage(Language fallback = Language.PL)
+    public Language GetLanguage(Language fallback = Language.EN)
     {
         // Pobieramy nagłówek Accept-Language
         var acceptLanguageHeader = _httpContextAccessor.HttpContext?.Request.Headers.AcceptLanguage.ToString();

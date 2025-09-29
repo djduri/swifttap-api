@@ -37,7 +37,7 @@ internal sealed class MailSenderService : IMailSenderService
     public async Task<bool> SendEmailAsync(string email,
                                            TemplateKey templateKey,
                                            IDictionary<string, object> templateVars,
-                                           Language language)
+                                           Language language = Language.EN)
     {
         try
         {
