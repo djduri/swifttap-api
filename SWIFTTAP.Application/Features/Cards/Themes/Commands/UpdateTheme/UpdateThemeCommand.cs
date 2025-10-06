@@ -14,4 +14,5 @@ public sealed record UpdateThemeCommand(long CardId,
                                         string? LinkBackgroundColor,
                                         string? LinkTextColor,
                                         bool HasSharpEdges,
-                                        bool RoundedProfilePicture) : ICommand<long>;
+                                        bool RoundedProfilePicture,
+                                        int? TilesPerRow) : ICommand<long>;

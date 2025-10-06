@@ -12,4 +12,5 @@ public sealed class ThemeCardDTO
     public string? LinkTextColor { get; set; }
     public required bool HasSharpEdges { get; set; }
     public required bool RoundedProfilePicture { get; set; }
+    public int? TilesPerRow { get; set; }
 }

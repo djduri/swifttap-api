@@ -47,7 +47,8 @@ internal sealed class UpdateThemeHandler : ICommandHandler<UpdateThemeCommand, l
                   .SetTextOnButtons(request.TextOnButtons)
                   .SetRoundedProfilePicture(request.RoundedProfilePicture)
                   .SetLinkBackgroundColor(request.LinkBackgroundColor)
-                  .SetLinkTextColor(request.LinkTextColor);
+                  .SetLinkTextColor(request.LinkTextColor)
+                  .SetTilesPerRow(request.TilesPerRow);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
         return request.CardId;

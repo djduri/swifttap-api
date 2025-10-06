@@ -12,4 +12,5 @@ public sealed class ThemeDetailsDTO
     public string? LinkTextColor { get; set; }
     public string? TextOnButtons { get; set; }
     public required bool HasSharpEdges { get;  set; }
+    public int? TilesPerRow { get; set; }
 }

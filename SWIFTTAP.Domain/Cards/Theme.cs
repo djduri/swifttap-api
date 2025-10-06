@@ -17,6 +17,7 @@ public sealed class Theme
     public string? LinkTextColor { get; private set; }
     public bool HasSharpEdges { get; private set; }
     public bool RoundedProfilePicture { get; private set; }
+    public int? TilesPerRow { get; set; }
 
     public Theme SetName(string? name)
     {
@@ -80,6 +81,12 @@ public sealed class Theme
     public Theme SetRoundedProfilePicture(bool roundedProfilePicture)
     {
         RoundedProfilePicture = roundedProfilePicture;
+        return this;
+    }
+
+    public Theme SetTilesPerRow(int? tilesPerRow)
+    {
+        TilesPerRow = tilesPerRow;
         return this;
     }
 
