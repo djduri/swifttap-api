@@ -16,7 +16,7 @@ internal class LinkConfiguration : IEntityTypeConfiguration<Link>
             .IsRequired();
 
         builder.Property(x => x.Name)
-            .HasMaxLength(32)
+            .HasMaxLength(100)
             .IsRequired();
 
         builder.Property(x => x.Url)
