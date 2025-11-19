@@ -49,6 +49,8 @@ public class Program
 
         builder.Services.AddCustomMailSender();
 
+        builder.Services.AddCustomContactForm();
+
         builder.Services.AddCustomBranding();
 
         builder.Services.AddCustomEmailTemplates();

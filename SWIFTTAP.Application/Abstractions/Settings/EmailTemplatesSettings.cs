@@ -25,6 +25,7 @@ public enum TemplateKey
     ResetPassword,
     ResetPasswordAsAdmin,
     CreateUser,
-    RegisterUser
+    RegisterUser,
+    ContactForm
 }
 

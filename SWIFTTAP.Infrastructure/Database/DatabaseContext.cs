@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SWIFTTAP.Domain.Administration;
 using SWIFTTAP.Domain.Base;
 using SWIFTTAP.Domain.Cards;
+using SWIFTTAP.Domain.ContactForms;
 using SWIFTTAP.Domain.Statistics;
 using SWIFTTAP.Domain.System;
 
@@ -33,6 +34,8 @@ public class DatabaseContext : IdentityDbContext<User, IdentityRole<long>, long>
     public DbSet<Theme> Themes => Set<Theme>();
     public DbSet<Logo> Logos => Set<Logo>();
     public DbSet<Card> Cards => Set<Card>();
+
+    public DbSet<ContactForm> ContactForms => Set<ContactForm>();
 
     public DbSet<CardVisitStatistic> CardVisitStatistics => Set<CardVisitStatistic>();
     public DbSet<LinkVisitStatistic> LinkVisitStatistics => Set<LinkVisitStatistic>();

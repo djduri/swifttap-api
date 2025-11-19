@@ -132,5 +132,15 @@ public static class ErrorCodes
         NotFound,
         RegistrationFailed,
         UpdateFailed
-    }  
+    }
+
+    public enum ContactForm
+    {
+        EmailInvalid,
+        NameInvalid,
+        PhoneInvalid,
+        CompanyInvalid,
+        QuantityInvalid,
+        MessageInvalid
+    }
 }
