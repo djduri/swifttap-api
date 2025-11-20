@@ -62,6 +62,8 @@ public class Program
         builder.Services.AddCustomBackgroundJobs(builder.Configuration);
 
         builder.Services.AddCustomHealthChecks(builder.Configuration);
+
+        builder.Services.AddCustomRateLimiter();
     }
 
     // Metoda konfiguruj¹ca aplikacjê
@@ -79,6 +81,7 @@ public class Program
         app.UseCustomLogger();
         app.UseAuthorization();
         app.UseCustomControllers();
+        app.UseCustomRateLimiter();
     }
 }
 
