@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.HttpOverrides;
 using SWIFTTAP.API.Configuration;
 using SWIFTTAP.Application;
 using SWIFTTAP.Infrastructure;
@@ -69,6 +70,16 @@ public class Program
     // Metoda konfiguruj¹ca aplikacjê
     private static void ConfigureApp(WebApplication app)
     {
+        // Forwarded headers (X-Forwarded-For) — wa¿ne dla Docker / proxy
+        var options = new ForwardedHeadersOptions
+        {
+            ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
+        };
+        // Zezwól na wszystkie sieci / proxy, przy Dockerze czêsto potrzebne
+        options.KnownNetworks.Clear();
+        options.KnownProxies.Clear();
+        app.UseForwardedHeaders(options);
+
         app.UseCustomHealthChecks(app.Environment);
         app.UseCustomExceptionHandlers();
         app.UseInfrastructureLayer(app.Services);
