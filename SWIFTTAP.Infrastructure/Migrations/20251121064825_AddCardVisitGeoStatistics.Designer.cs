@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using SWIFTTAP.Infrastructure.Database;
@@ -11,9 +12,11 @@ using SWIFTTAP.Infrastructure.Database;
 namespace SWIFTTAP.Infrastructure.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20251121064825_AddCardVisitGeoStatistics")]
+    partial class AddCardVisitGeoStatistics
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -593,12 +596,6 @@ namespace SWIFTTAP.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CardId");
-
-                    b.HasIndex("Date");
-
-                    b.HasIndex("CardId", "Date");
-
-                    b.HasIndex("City", "CountryCode");
 
                     b.ToTable("CardVisitGeoStatistics", "Statistics");
                 });

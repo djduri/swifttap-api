@@ -22,6 +22,7 @@ public sealed class Card : Entity
     public IList<Link> Links { get; private set; }
     public IList<CardVisitStatistic> CardVisitStatistics { get; private set; }
     public IList<VcfDownloadStatistic> VcfDownloadStatistics { get; private set; }
+    public IList<CardVisitGeoStatistic> CardVisitGeoStatistics { get; private set; }
 
 
     public Card SetUniqueName(string uniqueName)
@@ -79,6 +80,7 @@ public sealed class Card : Entity
         Links = new List<Link>();
         CardVisitStatistics = new List<CardVisitStatistic>();
         VcfDownloadStatistics = new List<VcfDownloadStatistic>();
+        CardVisitGeoStatistics = new List<CardVisitGeoStatistic>();
     }
 
     public static class Factory

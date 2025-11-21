@@ -34,6 +34,16 @@ public static class ErrorCodes
         NotFound
     }
 
+    public enum CardVisitGeoStatistic
+    {
+        IpAddressGetFailed,
+        GeolocationLookupFailed,
+        InvalidCardId,
+        InvalidCity,
+        InvalidCountryCode,
+        NotFound,
+    }
+
     public enum DeletedUser
     {
         InvalidName,

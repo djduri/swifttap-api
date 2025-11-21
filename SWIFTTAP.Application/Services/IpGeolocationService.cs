@@ -5,17 +5,20 @@ using SWIFTTAP.Application.Services.Interfaces;
 
 namespace SWIFTTAP.Application.Services;
 
-// Docs: https://ip-api.com/docs/api:json
-// TODO: Check if the provided IpAddress is valid
+// https://ip-api.com/docs/api:json
 internal sealed class IpGeolocationService : IIpGeolocationService
 {
-    private static readonly Uri BaseUri = new Uri("http://ip-api.com/");
+    private static readonly Uri IpApiUri = new Uri("http://ip-api.com/");
+    private static readonly int MemoryCacheDays = 3;
+    private static string MemoryCacheKey(string ipAddress) => $"{nameof(IpGeolocationService)}_{ipAddress}";
 
     private readonly IHttpClientFactory _httpClientFactory;
     private readonly IMemoryCache _memoryCache;
     private readonly ILogger<IpGeolocationService> _logger;
 
-    public IpGeolocationService(IHttpClientFactory httpClientFactory, IMemoryCache memoryCache, ILogger<IpGeolocationService> logger)
+    public IpGeolocationService(IHttpClientFactory httpClientFactory, 
+                                IMemoryCache memoryCache,
+                                ILogger<IpGeolocationService> logger)
     {
         _httpClientFactory = httpClientFactory;
         _memoryCache = memoryCache;
@@ -24,41 +27,40 @@ internal sealed class IpGeolocationService : IIpGeolocationService
 
     public async Task<IpGeolocationResult?> GetGeolocationAsync(string ipAddress, CancellationToken cancellationToken = default)
     {
-        if (_memoryCache.TryGetValue(CacheKey(ipAddress), out IpGeolocationResult? geolocation))
-        {
-            return geolocation;
-        }
+        // Sprawdzenie cache
+        if (_memoryCache.TryGetValue(MemoryCacheKey(ipAddress), out IpGeolocationResult? geolocation))        
+            return geolocation;        
 
         using var client = _httpClientFactory.CreateClient();
 
-        var requestUri = new Uri(BaseUri, $"json/{ipAddress}?fields=3719679");
+        var requestUri = new Uri(IpApiUri, $"json/{ipAddress}?fields=3719679");
 
         var response = await client.GetAsync(requestUri, cancellationToken);
         if (!response.IsSuccessStatusCode)
         {
-            _logger.LogError("External API responded with status {StatusCode} for {IpAdress}", response.StatusCode, ipAddress);
+            _logger.LogError("IP API returned non-success status {StatusCode} for IP {IpAddress}", response.StatusCode, ipAddress);
             return null;
         }
 
         geolocation = await response.Content.ReadFromJsonAsync<IpGeolocationResult>(cancellationToken);
+
         if (geolocation is null)
         {
-            _logger.LogError("Failed to deserialize the response for {IpAddress}", ipAddress);
+            _logger.LogError("IP geolocation API returned null data for {IpAddress} (deserialize error)", ipAddress);
             return null;
         }
 
         if (geolocation.Status.Equals("fail", StringComparison.InvariantCultureIgnoreCase))
         {
-            _logger.LogError("Ip address based geolocation lookup failed for {IpAddress} with {Message}", ipAddress, geolocation.Message);
+            _logger.LogError("Geolocation lookup failed for IP {IpAddress}: {Message}", ipAddress, geolocation.Message);
             return null;
         }
 
-        _memoryCache.Set(CacheKey(ipAddress), geolocation, TimeSpan.FromDays(3));
+        // Dodanie do cache
+        _memoryCache.Set(MemoryCacheKey(ipAddress), geolocation, TimeSpan.FromDays(MemoryCacheDays));
 
         return geolocation;
     }
-
-    private static string CacheKey(string ipAddress) => $"{nameof(IpGeolocationService)}_{ipAddress}";
 }
 
 public sealed record IpGeolocationResult(

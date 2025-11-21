@@ -29,7 +29,7 @@ internal sealed class GetSampledCardVisitStatisticsHandler : IQueryHandler<GetSa
 
     public async Task<IEnumerable<VisitStatisticSampledDTO>> Handle(GetSampledCardVisitStatisticsQuery request, CancellationToken cancellationToken)
     {
-        if (_userService.IsAuthenticatedUserNotAdmin() && _userService.GetAuthenticatedUserCardId() != request.CardId)
+        if (!_userService.HasAuthUserPermissionToCard(request.CardId))
         {
             _logger.LogWarning("Access denied for non-admin user trying to access card statistics. CardId: {CardId}", request.CardId);
             throw AccessDeniedException.FromErrorCode(ErrorCodes.Application.AccessDenied);

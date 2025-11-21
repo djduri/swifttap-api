@@ -1,11 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SWIFTTAP.Application.Abstractions;
 using SWIFTTAP.Application.Abstractions.Settings;
 using SWIFTTAP.Application.Exceptions;
+using SWIFTTAP.Application.Features.Statistics.CardVisitGeoStatistics.Commands.CreateCardVisitGeoStatistic;
 using SWIFTTAP.Application.Features.Statistics.CardVisitStatistics.Commands.CreateCardVisitStatistic;
 using SWIFTTAP.Domain.Messages;
 using SWIFTTAP.Infrastructure.Database;
@@ -44,6 +44,7 @@ internal sealed class GetCardHandler : IQueryHandler<GetCardQuery, string>
         var redirectUrl = (_frontendUrlSettings.Url + _frontendUrlSettings.GetUserCard).Replace("{uniqueName}", card.UniqueName);
 
         await _sender.Send(new CreateCardVisitStatisticCommand(card.Id));
+        await _sender.Send(new CreateCardVisitGeoStatisticCommand(card.Id));
 
         return redirectUrl;
     }

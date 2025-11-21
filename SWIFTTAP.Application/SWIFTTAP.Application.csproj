@@ -41,6 +41,7 @@
   <ItemGroup>
     <Folder Include="Features\Cards\Logo\DTOs\" />
     <Folder Include="Features\Cards\Themes\Queries\" />
+    <Folder Include="Features\Statistics\CardVisitGeoStatistics\Specifications\" />
     <Folder Include="Features\Statistics\VcfDownloadStatistics\DTOs\" />
   </ItemGroup>
 	

@@ -6,6 +6,9 @@ using SWIFTTAP.API.Areas.Abstractions;
 using SWIFTTAP.API.Attributes;
 using SWIFTTAP.Application.Authorization;
 using SWIFTTAP.Application.Common.DTOs;
+using SWIFTTAP.Application.Features.Statistics.CardVisitGeoStatistics.DTOs;
+using SWIFTTAP.Application.Features.Statistics.CardVisitGeoStatistics.Queries.GetSampledCardVisitGeoStatisticsByCity;
+using SWIFTTAP.Application.Features.Statistics.CardVisitGeoStatistics.Queries.GetSampledCardVisitGeoStatisticsByCountry;
 using SWIFTTAP.Application.Features.Statistics.CardVisitStatistics.Queries.GetSampledAllCardVisitStatistics;
 using SWIFTTAP.Application.Features.Statistics.CardVisitStatistics.Queries.GetSampledCardVisitStatistics;
 using SWIFTTAP.Application.Features.Statistics.LinkVisitStatistics.Commands.CreateLinkVisitStatistic;
@@ -68,5 +71,15 @@ public class StatisticsContoller: CmsController
     [HttpGet("SampledVcfDownloadStatistics")]
     [SwaggerOperation(OperationId = "GetSampledVcfDownloadStatistics")]
     public async Task<ActionResult<IEnumerable<VisitStatisticSampledDTO>>> GetSampledVcfDownloadStatistics([FromQuery] GetSampledVcfDownloadStatisticsQuery query) =>
+        Ok(await _sender.Send(query));
+
+    [HttpGet("SampledCardVisitGeoStatisticsByCity")]
+    [SwaggerOperation(OperationId = "GetSampledCardVisitGeoStatisticsByCity")]
+    public async Task<ActionResult<IEnumerable<CityVisitStatisticsDTO>>> GetSampledCardVisitGeoStatisticsByCity([FromQuery] GetSampledCardVisitGeoStatisticsByCityQuery query) =>
+        Ok(await _sender.Send(query));
+
+    [HttpGet("SampledCardVisitGeoStatisticsByCountry")]
+    [SwaggerOperation(OperationId = "GetSampledCardVisitGeoStatisticsByCountry")]
+    public async Task<ActionResult<IEnumerable<CountryVisitStatisticsDTO>>> GetSampledCardVisitGeoStatisticsByCountry([FromQuery] GetSampledCardVisitGeoStatisticsByCountryQuery query) =>
         Ok(await _sender.Send(query));
 }
